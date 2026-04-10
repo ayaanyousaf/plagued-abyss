@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu6m5umpoko53"]
+[gd_scene load_steps=4 format=3 uid="uid://bu6m5umpoko53"]
 
 [ext_resource type="PackedScene" uid="uid://crc1ipkq74klg" path="res://scenes/Player.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://d2c0nah5etor3" path="res://scenes/Bullet.tscn" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://bimonoddd7khi" path="res://scenes/Enemy.tscn" id="3_0bbpv"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_elqb8")]
 bullet_scene = ExtResource("2_rvslj")
+
+[node name="Enemy" parent="." instance=ExtResource("3_0bbpv")]
+position = Vector2(736, 150)

@@ -1,8 +1,8 @@
-extends CharacterBody2D
+extends Area2D
 
 const SPEED = 600.0
 var direction = Vector2.ZERO
 
-func _physics_process(delta: float) -> void:
-	velocity = direction * SPEED
-	move_and_slide()
+func _process(delta) -> void:
+	position += direction * SPEED * delta
+	rotation = direction.angle()

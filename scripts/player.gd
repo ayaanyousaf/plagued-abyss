@@ -25,8 +25,9 @@ func _physics_process(delta: float) -> void:
 
 func shoot(): 
 	var mouse_position = get_global_mouse_position()
+	var barrel = $Barrel
 	var bullet = bullet_scene.instantiate()
-	bullet.global_position = global_position
+	bullet.global_position = barrel.global_position
 	
-	bullet.direction = (mouse_position - global_position).normalized()
+	bullet.direction = (mouse_position - barrel.global_position).normalized()
 	get_tree().current_scene.add_child(bullet)
