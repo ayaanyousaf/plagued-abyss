@@ -1,6 +1,8 @@
 extends CharacterBody2D
 @export var bullet_scene: PackedScene
 
+signal died
+
 const SPEED = 300.0
 var hp = 3
 var taken_damage = false
@@ -31,7 +33,7 @@ func shoot():
 	bullet.global_position = barrel.global_position
 	
 	bullet.direction = (mouse_position - barrel.global_position).normalized()
-	get_tree().current_scene.add_child(bullet)
+	get_parent().get_node("Bullets").add_child(bullet)
 
 func take_damage(amount): 
 	if taken_damage: 
@@ -44,8 +46,12 @@ func take_damage(amount):
 	$DamageCooldown.start()
 	
 	if hp <= 0: 
-		print("Game Over. You survived ____ waves.")
-		queue_free()
+		die()
+
+func die(): 
+	print("Game Over. You survived ____ waves.")
+	died.emit()
+	queue_free()	
 
 func _on_damage_cooldown_timeout() -> void:
 	taken_damage = false

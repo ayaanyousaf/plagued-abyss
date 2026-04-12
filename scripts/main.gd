@@ -1,13 +1,12 @@
 extends Node2D
 
+@export var world_scene: PackedScene
+@onready var world_container = $WorldContainer
+
 @onready var menu_UI = $UI/Menu
+@onready var controls_overlay = $UI/Menu/ControlsOverlay
 @onready var game_UI = $UI/Game
 @onready var gameover_UI = $UI/GameOver
-
-@onready var controls_overlay = $UI/Menu/ControlsOverlay
-
-@onready var player = $Player
-@onready var enemies = $Enemies
 
 # Define game states
 enum GameState {
@@ -17,7 +16,7 @@ enum GameState {
 }
 
 var current_state = GameState.MENU # state is MENU on launch
-
+var current_world: Node2D = null # initialize game world
 
 func _ready() -> void:
 	change_state(GameState.MENU)
@@ -28,12 +27,31 @@ func _on_play_pressed() -> void:
 	start_game()
 	
 func start_game(): 
-	change_state(GameState.PLAY)
+	clear_world()
+
+	current_world = world_scene.instantiate()
+	world_container.add_child(current_world)
 	
+	# Connect signal from world (change state if player dies)
+	current_world.player_died.connect(_on_player_died)
+	
+	change_state(GameState.PLAY)
+
 func end_game(): 
+	clear_world()
 	change_state(GameState.GAME_OVER)
 	
-# Update global game state
+	if Input.is_action_just_pressed("continue"): 
+		change_state(GameState.MENU)
+
+# Resets world state
+func clear_world() -> void: 
+	print("WORLD CLEARED")
+	if current_world != null: 
+		current_world.queue_free()
+		current_world = null 
+
+# Updates global game state
 func change_state(state):
 	current_state = state
 	
@@ -53,3 +71,10 @@ func _on_controls_pressed() -> void:
 
 func _on_close_controls_pressed() -> void:
 	controls_overlay.visible = false
+	
+func _on_player_died() -> void: 
+	end_game()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if current_state == GameState.GAME_OVER and event.is_action_pressed("continue"):
+		change_state(GameState.MENU)
