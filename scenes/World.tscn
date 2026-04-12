@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhcc34md8r576"]
+[gd_scene load_steps=6 format=3 uid="uid://dhcc34md8r576"]
 
 [ext_resource type="PackedScene" uid="uid://crc1ipkq74klg" path="res://scenes/Player.tscn" id="1_7g83o"]
 [ext_resource type="Script" uid="uid://cq26ncnek7fnh" path="res://scripts/world.gd" id="1_d1c63"]
 [ext_resource type="PackedScene" uid="uid://d2c0nah5etor3" path="res://scenes/Bullet.tscn" id="2_d1c63"]
+[ext_resource type="PackedScene" uid="uid://bimonoddd7khi" path="res://scenes/Enemy.tscn" id="3_1lgw5"]
 [ext_resource type="Script" uid="uid://c62ebr4y6klgs" path="res://scripts/wave_spawner.gd" id="4_d1c63"]
 
 [node name="World" type="Node2D"]
@@ -25,5 +26,6 @@ bullet_scene = ExtResource("2_d1c63")
 
 [node name="WaveSpawner" type="Node2D" parent="."]
 script = ExtResource("4_d1c63")
+enemy_scene = ExtResource("3_1lgw5")
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]

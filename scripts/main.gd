@@ -7,6 +7,7 @@ extends Node2D
 @onready var controls_overlay = $UI/Menu/ControlsOverlay
 @onready var game_UI = $UI/Game
 @onready var gameover_UI = $UI/GameOver
+@onready var game_over_message = $UI/GameOver/GameOverMessage
 
 # Define game states
 enum GameState {
@@ -37,9 +38,11 @@ func start_game():
 	
 	change_state(GameState.PLAY)
 
-func end_game(): 
+func end_game(final_wave): 
 	clear_world()
 	change_state(GameState.GAME_OVER)
+	
+	game_over_message.text = "You survived " + str(final_wave) + " waves" 
 	
 	if Input.is_action_just_pressed("continue"): 
 		change_state(GameState.MENU)
@@ -72,8 +75,8 @@ func _on_controls_pressed() -> void:
 func _on_close_controls_pressed() -> void:
 	controls_overlay.visible = false
 	
-func _on_player_died() -> void: 
-	end_game()
+func _on_player_died(final_wave: int) -> void: 
+	end_game(final_wave)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_state == GameState.GAME_OVER and event.is_action_pressed("continue"):
