@@ -19,3 +19,5 @@ shape = SubResource("CapsuleShape2D_hf8mt")
 texture = ExtResource("1_hf8mt")
 region_enabled = true
 region_rect = Rect2(483, 200, 26, 17)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,6 +2,8 @@ extends CharacterBody2D
 @export var bullet_scene: PackedScene
 
 const SPEED = 300.0
+var hp = 3
+var taken_damage = false
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -22,7 +24,6 @@ func _physics_process(delta: float) -> void:
 	if (Input.is_action_just_pressed("shoot")):
 		shoot()
 	
-
 func shoot(): 
 	var mouse_position = get_global_mouse_position()
 	var barrel = $Barrel
@@ -31,3 +32,20 @@ func shoot():
 	
 	bullet.direction = (mouse_position - barrel.global_position).normalized()
 	get_tree().current_scene.add_child(bullet)
+
+func take_damage(amount): 
+	if taken_damage: 
+		return 
+		
+	hp -= amount
+	print("Player HP:", hp) # log the players health (debug)
+	
+	taken_damage = true
+	$DamageCooldown.start()
+	
+	if hp <= 0: 
+		print("Game Over. You survived ____ waves.")
+		queue_free()
+
+func _on_damage_cooldown_timeout() -> void:
+	taken_damage = false
