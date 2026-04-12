@@ -34,4 +34,11 @@ shape = SubResource("RectangleShape2D_v6fml")
 [node name="DamageCooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="PlayerCamera" type="Camera2D" parent="."]
+limit_left = -700
+limit_top = -300
+limit_right = 1300
+limit_bottom = 1000
+position_smoothing_enabled = true
+
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]

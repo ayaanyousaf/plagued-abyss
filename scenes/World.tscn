@@ -10,14 +10,14 @@
 script = ExtResource("1_d1c63")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -330.0
-offset_top = -241.0
-offset_right = 1500.0
-offset_bottom = 878.0
+offset_left = -700.0
+offset_top = -300.0
+offset_right = 1300.0
+offset_bottom = 1000.0
 color = Color(0.016173737, 0.120763876, 0.16246304, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_7g83o")]
-position = Vector2(72, 57)
+position = Vector2(282, 337)
 bullet_scene = ExtResource("2_d1c63")
 
 [node name="Enemies" type="Node2D" parent="."]
