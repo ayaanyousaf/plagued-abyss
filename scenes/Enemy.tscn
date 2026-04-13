@@ -36,11 +36,13 @@
 [ext_resource type="Texture2D" uid="uid://buk3u33c0metr" path="res://assets/zombie_sprites/skeleton-move_15.png" id="34_na7cp"]
 [ext_resource type="Texture2D" uid="uid://lvva321o8kv1" path="res://assets/zombie_sprites/skeleton-move_16.png" id="35_a7c5l"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qkhh"]
-size = Vector2(36.5, 44)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nsvt"]
+radius = 16.666664
+height = 40.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_55jtl"]
-size = Vector2(36.5, 44.5)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0c6gl"]
+radius = 24.999998
+height = 56.666664
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mpr68"]
 animations = [{
@@ -163,14 +165,14 @@ collision_layer = 2
 script = ExtResource("1_55jtl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
-position = Vector2(7.75, 1)
-shape = SubResource("RectangleShape2D_2qkhh")
+position = Vector2(6.666668, 0)
+shape = SubResource("CapsuleShape2D_1nsvt")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="AttackRange" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(7.75, 0.75)
-shape = SubResource("RectangleShape2D_55jtl")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(11.666666, 0)
+shape = SubResource("CapsuleShape2D_0c6gl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1.5574417, 0.039517805, 2.5432363, 1)
@@ -179,6 +181,13 @@ scale = Vector2(0.23090278, 0.23543575)
 sprite_frames = SubResource("SpriteFrames_mpr68")
 animation = &"Move"
 autoplay = "Move"
-frame_progress = 0.4804451
+frame_progress = 0.89486283
+metadata/_edit_lock_ = true
 
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

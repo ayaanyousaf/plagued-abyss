@@ -4,9 +4,12 @@ extends CharacterBody2D
 signal died
 signal hp_updated(hp)
 
-const SPEED = 200.0
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+
+const SPEED = 180.0
 var hp = 3
 var taken_damage = false
+
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -22,6 +25,12 @@ func _physics_process(delta: float) -> void:
 	
 	# Face player towards mouse position at all times
 	look_at(get_global_mouse_position())
+	
+	# Switch between idle and move animations
+	if direction != Vector2.ZERO: 
+		animation.play("Move")
+	else: 
+		animation.play("Idle")
 	
 	# Shoot logic
 	if (Input.is_action_just_pressed("shoot")):

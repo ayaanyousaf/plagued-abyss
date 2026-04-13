@@ -175,8 +175,9 @@ animations = [{
 "speed": 22.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q5h1"]
-size = Vector2(42, 25)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tk6la"]
+radius = 11.428571
+height = 34.285713
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
 size = Vector2(42, 25)
@@ -190,18 +191,21 @@ modulate = Color(0.9620864, 1.0794748, 5.3189974, 1)
 position = Vector2(-2.9999998, -2.9999998)
 scale = Vector2(0.20966454, 0.21074876)
 sprite_frames = SubResource("SpriteFrames_p0vlq")
-animation = &"Move"
+animation = &"Idle"
 autoplay = "Move"
-frame_progress = 0.95842165
+frame_progress = 0.033742025
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, 0.5)
-shape = SubResource("RectangleShape2D_5q5h1")
+position = Vector2(-10, 1.4285715)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_tk6la")
 
 [node name="Barrel" type="Marker2D" parent="."]
 position = Vector2(22, 7)
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-6, 0.5)

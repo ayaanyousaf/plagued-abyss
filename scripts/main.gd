@@ -56,6 +56,9 @@ func end_game(final_wave):
 # Resets world state
 func clear_world() -> void: 
 	print("WORLD CLEARED")
+	
+	hp_bar.value = 3
+	
 	if current_world != null: 
 		current_world.queue_free()
 		current_world = null 
