@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://foqajksevsey"
-path="res://.godot/imported/Stranger back in the Night.ttf-04581ae0150e3618863644c213bc2c62.fontdata"
+path="res://.godot/imported/Stranger back in the Night.ttf-14c035309a522489490ae7423b19180f.fontdata"
 
 [deps]
 
-source_file="res://assets/Stranger back in the Night.ttf"
-dest_files=["res://.godot/imported/Stranger back in the Night.ttf-04581ae0150e3618863644c213bc2c62.fontdata"]
+source_file="res://assets/fonts/Stranger back in the Night.ttf"
+dest_files=["res://.godot/imported/Stranger back in the Night.ttf-14c035309a522489490ae7423b19180f.fontdata"]
 
 [params]
 

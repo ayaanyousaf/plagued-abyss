@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d0c51iiw12c73"
-path="res://.godot/imported/bloodcrowsc.ttf-33d5e1247b8a0dfdf1733d0eda001a71.fontdata"
+uid="uid://djc2tq84u7bsl"
+path="res://.godot/imported/bloodcrow.ttf-3f54321ed6be81d5df808196f05529e2.fontdata"
 
 [deps]
 
-source_file="res://assets/bloodcrowsc.ttf"
-dest_files=["res://.godot/imported/bloodcrowsc.ttf-33d5e1247b8a0dfdf1733d0eda001a71.fontdata"]
+source_file="res://assets/fonts/bloodcrow.ttf"
+dest_files=["res://.godot/imported/bloodcrow.ttf-3f54321ed6be81d5df808196f05529e2.fontdata"]
 
 [params]
 

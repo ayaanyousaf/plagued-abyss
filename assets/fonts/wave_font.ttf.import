@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://djc2tq84u7bsl"
-path="res://.godot/imported/bloodcrow.ttf-1170e17816c807cb2472496b6d7459b9.fontdata"
+uid="uid://bnukulmqy6kyv"
+path="res://.godot/imported/wave_font.ttf-e4d30f844e3ac1b60db4bca4dc028d41.fontdata"
 
 [deps]
 
-source_file="res://assets/bloodcrow.ttf"
-dest_files=["res://.godot/imported/bloodcrow.ttf-1170e17816c807cb2472496b6d7459b9.fontdata"]
+source_file="res://assets/fonts/wave_font.ttf"
+dest_files=["res://.godot/imported/wave_font.ttf-e4d30f844e3ac1b60db4bca4dc028d41.fontdata"]
 
 [params]
 
