@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dieji7vw61o7r"
-path="res://.godot/imported/Enemy.png-4469ef267ace4325be6db86bf6c58218.ctex"
+uid="uid://cim0skxrwl4ld"
+path="res://.godot/imported/DungeonTileSet.png-a228e2377a6fe5c56e625176e2ca107f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemy.png"
-dest_files=["res://.godot/imported/Enemy.png-4469ef267ace4325be6db86bf6c58218.ctex"]
+source_file="res://assets/DungeonTileSet.png"
+dest_files=["res://.godot/imported/DungeonTileSet.png-a228e2377a6fe5c56e625176e2ca107f.ctex"]
 
 [params]
 

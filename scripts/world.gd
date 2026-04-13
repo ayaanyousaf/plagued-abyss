@@ -1,6 +1,8 @@
 extends Node2D
 
 signal player_died(final_wave)
+signal player_hp_updated(hp)
+signal wave_started(wave)
 
 @onready var player = $Player
 @onready var enemies = $Enemies
@@ -11,6 +13,7 @@ var waiting_for_next_wave = false
 
 func _ready() -> void:
 	player.died.connect(_on_player_died) # World checks if player died 
+	player.hp_updated.connect(_on_player_hp_updated)
 	start_wave()
 
 func _process(delta: float) -> void: 
@@ -25,6 +28,7 @@ func _process(delta: float) -> void:
 		start_next_wave()
 	
 func start_wave(): 
+	wave_started.emit(current_wave)
 	wave_spawner.spawn_wave(current_wave)
 	
 # Starts the next wave and updates wave counter
@@ -36,3 +40,6 @@ func start_next_wave():
 
 func _on_player_died() -> void:
 	player_died.emit(current_wave) # World forwards signal telling main that player died
+
+func _on_player_hp_updated(hp: int) -> void: 
+	player_hp_updated.emit(hp)

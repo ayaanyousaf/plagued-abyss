@@ -9,6 +9,9 @@ extends Node2D
 @onready var gameover_UI = $UI/GameOver
 @onready var game_over_message = $UI/GameOver/GameOverMessage
 
+@onready var wave_label = $UI/Game/Wave
+@onready var hp_bar = $UI/Game/HealthBar
+
 # Define game states
 enum GameState {
 	MENU,
@@ -26,15 +29,18 @@ func _ready() -> void:
 func _on_play_pressed() -> void:
 	print("PLAY BUTTON CLICKED")
 	start_game()
-	
+
+# Starts a new game with a fresh world
 func start_game(): 
 	clear_world()
 
 	current_world = world_scene.instantiate()
 	world_container.add_child(current_world)
 	
-	# Connect signal from world (change state if player dies)
+	# Connect signals from world (wave count and player death)
 	current_world.player_died.connect(_on_player_died)
+	current_world.wave_started.connect(_on_wave_started)
+	current_world.player_hp_updated.connect(_on_player_hp_updated)
 	
 	change_state(GameState.PLAY)
 
@@ -77,6 +83,12 @@ func _on_close_controls_pressed() -> void:
 	
 func _on_player_died(final_wave: int) -> void: 
 	end_game(final_wave)
+
+func _on_player_hp_updated(hp: int) -> void: 
+	hp_bar.value = hp
+	
+func _on_wave_started(wave: int) -> void: 
+	wave_label.text = "Wave " + str(wave)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_state == GameState.GAME_OVER and event.is_action_pressed("continue"):

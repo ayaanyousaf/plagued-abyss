@@ -2,6 +2,7 @@ extends CharacterBody2D
 @export var bullet_scene: PackedScene
 
 signal died
+signal hp_updated(hp)
 
 const SPEED = 300.0
 var hp = 3
@@ -40,6 +41,7 @@ func take_damage(amount):
 		return 
 		
 	hp -= amount
+	hp_updated.emit(hp) # send hp signal to World scene
 	print("Player HP:", hp) # log the players health (debug)
 	
 	taken_damage = true

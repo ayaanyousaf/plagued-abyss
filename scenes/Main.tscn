@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://bu6m5umpoko53"]
+[gd_scene load_steps=19 format=3 uid="uid://bu6m5umpoko53"]
 
 [ext_resource type="Script" uid="uid://bfbkqg2lysug5" path="res://scripts/main.gd" id="1_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://dhcc34md8r576" path="res://scenes/World.tscn" id="2_c01mt"]
 [ext_resource type="FontFile" uid="uid://djc2tq84u7bsl" path="res://assets/bloodcrow.ttf" id="4_c01mt"]
 [ext_resource type="Texture2D" uid="uid://c5ng15w00x74o" path="res://assets/Background.png" id="4_rarhs"]
 [ext_resource type="FontFile" uid="uid://foqajksevsey" path="res://assets/Stranger back in the Night.ttf" id="5_c01mt"]
+[ext_resource type="Texture2D" uid="uid://c60ww0xck36xv" path="res://assets/UI_Frame.png" id="7_jlsqs"]
+[ext_resource type="FontFile" uid="uid://csfdep2y07y3m" path="res://assets/UI_font.ttf" id="7_nxtc6"]
 [ext_resource type="Texture2D" uid="uid://b827me0hi5tcw" path="res://assets/x_button.png" id="8_jlsqs"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vcsgt"]
@@ -32,6 +34,26 @@ shadow_size = 18
 shadow_color = Color(0, 0.9019608, 0.92941177, 0.6)
 shadow_size = 12
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhr70"]
+bg_color = Color(0.12591082, 0.12591085, 0.12591076, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8u5g"]
+bg_color = Color(0.63222545, 1.4078245e-06, 2.4065375e-07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.000113828006, 0.000113828064, 0.00011382786, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 4
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c01mt"]
 bg_color = Color(0.049475692, 0.039731156, 0.0053792885, 1)
 
@@ -42,6 +64,7 @@ world_scene = ExtResource("2_c01mt")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Menu" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,7 +233,44 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
+[node name="UIFrame" type="TextureRect" parent="UI/Game"]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -47.0
+offset_right = 2174.0
+offset_bottom = 1207.9999
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_jlsqs")
+metadata/_edit_lock_ = true
+
+[node name="Wave" type="Label" parent="UI/Game"]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 550.0
+offset_right = 1083.0
+offset_bottom = 650.0
+theme_override_colors/font_color = Color(1, 0.3414471, 0.9950256, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_nxtc6")
+theme_override_font_sizes/font_size = 100
+text = "Wave 1"
+
+[node name="HealthBar" type="ProgressBar" parent="UI/Game"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 598.0
+offset_right = 297.0
+offset_bottom = 623.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lhr70")
+theme_override_styles/fill = SubResource("StyleBoxFlat_q8u5g")
+max_value = 3.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
 [node name="GameOver" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
