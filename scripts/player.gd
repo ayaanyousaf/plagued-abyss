@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal died
 signal hp_updated(hp)
 
-const SPEED = 300.0
+const SPEED = 200.0
 var hp = 3
 var taken_damage = false
 
