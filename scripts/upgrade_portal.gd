@@ -8,12 +8,19 @@ extends Area2D
 @onready var prompt_label: Label = $Prompt
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var denied_SFX: AudioStreamPlayer2D = $DeniedSFX
+@onready var ambience: AudioStreamPlayer2D = $PortalAmbience
 
 var player_in_range = false
 var player: CharacterBody2D = null
 var world: Node2D = null
 var is_holding_interact = false
 var purchased = false
+
+# Variables for portal ambience fading effect
+var target_volume := -40.0
+const FADE_SPEED := 5.0   # higher = faster fade
+const FULL_VOLUME := -5.0
+const LOW_VOLUME := -40.0
 
 func _ready() -> void:
 	world = get_parent()
@@ -26,8 +33,14 @@ func _ready() -> void:
 	progress_bar.min_value = 0.0
 	progress_bar.max_value = hold_time
 	progress_bar.value = 0.0
+	
+	ambience.volume_db = LOW_VOLUME
+	ambience.play()
 
 func _process(delta: float) -> void:
+	# Fade ambient portal sounds
+	ambience.volume_db = lerp(ambience.volume_db, target_volume, delta * FADE_SPEED)
+	
 	if purchased: 
 		return
 		
@@ -67,6 +80,8 @@ func _on_body_entered(body: Node2D) -> void:
 		player_in_range = true
 		player = body
 		
+		target_volume = FULL_VOLUME
+		
 		var upgrade_name = ""
 		match upgrade_type:
 			"hp":
@@ -93,6 +108,7 @@ func _on_body_exited(body: Node2D) -> void:
 		player = null
 		
 		stop_hold()
+		target_volume = LOW_VOLUME
 		
 		prompt_label.visible = false
 		progress_bar.visible = false
