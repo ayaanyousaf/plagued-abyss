@@ -311,7 +311,7 @@ offset_top = 232.0
 offset_right = 318.0
 offset_bottom = 304.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("4_c01mt")
+theme_override_fonts/font = ExtResource("4_lhr70")
 theme_override_font_sizes/font_size = 52
 text = "YOU SURVIVED 0 WAVES"
 
@@ -328,7 +328,7 @@ offset_right = 189.0
 offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_c01mt")
+theme_override_fonts/font = ExtResource("4_lhr70")
 theme_override_font_sizes/font_size = 32
 text = "Click ENTER to continue"
 
