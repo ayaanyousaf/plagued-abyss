@@ -187,13 +187,13 @@ scale = Vector2(0.7, 0.7)
 script = ExtResource("1_p0vlq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.9620864, 1.0794748, 5.3189974, 1)
+modulate = Color(0.19259255, 1.243561, 1.5001788, 1)
 position = Vector2(-2.9999998, -2.9999998)
 scale = Vector2(0.20966454, 0.21074876)
 sprite_frames = SubResource("SpriteFrames_p0vlq")
 animation = &"Idle"
 autoplay = "Move"
-frame_progress = 0.033742025
+frame_progress = 0.6683344
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -216,10 +216,10 @@ one_shot = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
-limit_left = -700
-limit_top = -300
-limit_right = 1300
-limit_bottom = 1000
+limit_left = -1010
+limit_top = -775
+limit_right = 2157
+limit_bottom = 1107
 position_smoothing_enabled = true
 
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]
