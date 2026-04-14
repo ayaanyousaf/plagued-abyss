@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bfbkqg2lysug5" path="res://scripts/main.gd" id="1_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://dhcc34md8r576" path="res://scenes/World.tscn" id="2_c01mt"]
-[ext_resource type="FontFile" path="res://assets/bloodcrow.ttf" id="4_c01mt"]
 [ext_resource type="FontFile" uid="uid://djc2tq84u7bsl" path="res://assets/fonts/bloodcrow.ttf" id="4_lhr70"]
 [ext_resource type="Texture2D" uid="uid://c5ng15w00x74o" path="res://assets/Background.png" id="4_rarhs"]
 [ext_resource type="FontFile" uid="uid://foqajksevsey" path="res://assets/fonts/Stranger back in the Night.ttf" id="5_wp0k4"]
+[ext_resource type="FontFile" uid="uid://dvw5ocmoil4p4" path="res://assets/fonts/BebasNeue-Regular.ttf" id="7_bjd11"]
 [ext_resource type="Texture2D" uid="uid://c60ww0xck36xv" path="res://assets/UI_Frame.png" id="7_jlsqs"]
 [ext_resource type="Texture2D" uid="uid://b827me0hi5tcw" path="res://assets/x_button.png" id="8_jlsqs"]
 [ext_resource type="FontFile" uid="uid://bnukulmqy6kyv" path="res://assets/fonts/wave_font.ttf" id="9_lhr70"]
@@ -31,8 +31,9 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
-shadow_color = Color(0.101960786, 0.10980392, 1, 0.6)
+shadow_color = Color(0.79607844, 0.36078432, 1, 1)
 shadow_size = 18
+shadow_offset = Vector2(4, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlsqs"]
 shadow_color = Color(0, 0.9019608, 0.92941177, 0.6)
@@ -68,7 +69,6 @@ world_scene = ExtResource("2_c01mt")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Menu" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,10 +113,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -112.0
-offset_top = -312.0
-offset_right = 112.0
-offset_bottom = -68.0
+offset_left = -76.5
+offset_top = -318.0
+offset_right = 76.5
+offset_bottom = -74.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 2
@@ -125,6 +125,7 @@ alignment = 1
 [node name="Play" type="Button" parent="UI/Menu/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.79646385, 0.36023706, 1, 1)
 theme_override_fonts/font = ExtResource("5_wp0k4")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nxtc6")
@@ -133,6 +134,7 @@ text = "Play"
 [node name="Controls" type="Button" parent="UI/Menu/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.79607844, 0.36078432, 1, 1)
 theme_override_fonts/font = ExtResource("5_wp0k4")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jlsqs")
@@ -141,6 +143,7 @@ text = "Controls"
 [node name="Exit" type="Button" parent="UI/Menu/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.79607844, 0.36078432, 1, 1)
 theme_override_fonts/font = ExtResource("5_wp0k4")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c01mt")
@@ -177,7 +180,7 @@ offset_right = 1967.0001
 offset_bottom = 1054.0
 scale = Vector2(0.1, 0.1)
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.99215686)
-theme_override_colors/icon_hover_color = Color(0.74138474, 0.7413847, 0.74138457, 1)
+theme_override_colors/icon_hover_color = Color(0.79607844, 0.36078432, 1, 1)
 theme_override_icons/icon = ExtResource("8_jlsqs")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jlsqs")
 icon = ExtResource("8_jlsqs")
@@ -193,7 +196,7 @@ offset_top = 60.0
 offset_right = 108.5
 offset_bottom = 127.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("4_c01mt")
+theme_override_fonts/font = ExtResource("7_bjd11")
 theme_override_font_sizes/font_size = 60
 text = "Controls"
 
@@ -213,19 +216,19 @@ grow_vertical = 2
 
 [node name="Movement" type="Label" parent="UI/Menu/ControlsOverlay/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_c01mt")
+theme_override_fonts/font = ExtResource("7_bjd11")
 theme_override_font_sizes/font_size = 48
 text = "WASD - Move"
 
 [node name="Shoot" type="Label" parent="UI/Menu/ControlsOverlay/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_c01mt")
+theme_override_fonts/font = ExtResource("7_bjd11")
 theme_override_font_sizes/font_size = 48
 text = "Left Click - Shoot"
 
 [node name="Interact" type="Label" parent="UI/Menu/ControlsOverlay/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_c01mt")
+theme_override_fonts/font = ExtResource("7_bjd11")
 theme_override_font_sizes/font_size = 48
 text = "F - Interact"
 

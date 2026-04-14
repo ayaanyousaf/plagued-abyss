@@ -62,6 +62,8 @@ func end_game(final_wave):
 func clear_world() -> void: 
 	print("WORLD CLEARED")
 	
+	score_label.text = "0"
+	
 	hp_bar.max_value = 3
 	hp_bar.value = 3
 	
