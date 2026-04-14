@@ -2,19 +2,22 @@ extends CharacterBody2D
 @export var bullet_scene: PackedScene
 
 signal died
-signal hp_updated(hp)
+signal hp_updated(hp, max_hp)
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
-
 @onready var fire_rate: Timer = $FireRate
 @onready var regen_tick: Timer = $HealthRegenTick
 @onready var regen_delay: Timer = $HealthRegenDelay
 
-const SPEED = 180.0
+var move_speed = 180.0
 var max_hp = 3
 var hp = 3
+var dmg = 1
+
 var taken_damage = false
 var can_shoot = true
+
+var purchased_upgrades: Array[String] = []
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -24,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	direction.y = Input.get_axis("move_up", "move_down")
 	
 	direction = direction.normalized()
-	velocity = direction * SPEED
+	velocity = direction * move_speed
 	
 	move_and_slide()
 	
@@ -47,6 +50,8 @@ func shoot():
 	var mouse_position = get_global_mouse_position()
 	var barrel = $Barrel
 	var bullet = bullet_scene.instantiate()
+	
+	bullet.damage = dmg # set bullet damage
 	bullet.global_position = barrel.global_position
 	
 	bullet.direction = (mouse_position - barrel.global_position).normalized()
@@ -59,7 +64,7 @@ func take_damage(amount):
 		return 
 		
 	hp -= amount
-	hp_updated.emit(hp) # send hp signal to World scene
+	hp_updated.emit(hp, max_hp) # send hp signal to World scene
 	print("Player HP:", hp) # log the players health (debug)
 	
 	taken_damage = true
@@ -75,7 +80,29 @@ func take_damage(amount):
 func die(): 
 	print("Player died. Game over.")
 	died.emit()
-	queue_free()	
+	queue_free()
+
+func apply_upgrade(upgrade_type: String) -> bool: 
+	if upgrade_type in purchased_upgrades:
+		return false
+		
+	match upgrade_type: 
+		"hp": 
+			max_hp += 2 # increased hp upgrade
+			hp = max_hp
+			hp_updated.emit(hp, max_hp)
+		"speed": 
+			move_speed += 40 # increased movement speed
+		"rapid_fire":
+			fire_rate.wait_time = 0.1 # double fire rate
+		"dmg": 
+			dmg = 2
+		_: 
+			return false
+			
+	purchased_upgrades.append(upgrade_type)
+	return true
+			
 
 func _on_damage_cooldown_timeout() -> void:
 	taken_damage = false
@@ -90,7 +117,7 @@ func _on_health_regen_delay_timeout() -> void:
 func _on_health_regen_tick_timeout() -> void:
 	if hp < max_hp: 
 		hp += 1
-		hp_updated.emit(hp)
+		hp_updated.emit(hp, max_hp)
 		
 	if hp >= max_hp: 
 		regen_tick.stop()

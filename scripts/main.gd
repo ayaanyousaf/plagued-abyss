@@ -59,6 +59,7 @@ func end_game(final_wave):
 func clear_world() -> void: 
 	print("WORLD CLEARED")
 	
+	hp_bar.max_value = 3
 	hp_bar.value = 3
 	
 	if current_world != null: 
@@ -89,7 +90,8 @@ func _on_close_controls_pressed() -> void:
 func _on_player_died(final_wave: int) -> void: 
 	end_game(final_wave)
 
-func _on_player_hp_updated(hp: int) -> void: 
+func _on_player_hp_updated(hp: int, max_hp: int) -> void: 
+	hp_bar.max_value = max_hp
 	hp_bar.value = hp
 	
 func _on_score_updated(score: int) -> void: 

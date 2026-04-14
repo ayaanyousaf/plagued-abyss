@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dhcc34md8r576"]
+[gd_scene load_steps=9 format=4 uid="uid://dhcc34md8r576"]
 
 [ext_resource type="PackedScene" uid="uid://crc1ipkq74klg" path="res://scenes/Player.tscn" id="1_7g83o"]
 [ext_resource type="Script" uid="uid://cq26ncnek7fnh" path="res://scripts/world.gd" id="1_d1c63"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://dnin30pk1cc3o" path="res://tilesets/DungeonTileset.tres" id="2_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://bimonoddd7khi" path="res://scenes/Enemy.tscn" id="3_1lgw5"]
 [ext_resource type="Script" uid="uid://c62ebr4y6klgs" path="res://scripts/wave_spawner.gd" id="4_d1c63"]
+[ext_resource type="PackedScene" uid="uid://b25eqd1hsmbac" path="res://scenes/UpgradePortal.tscn" id="7_0uv0p"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hlk0d"]
 vertices = PackedVector2Array(202.75, 477.28906, 204.71094, 547, -142.07813, 547, -144.92188, 180.85938, 214.03906, 176.13281, 215.03906, 427.97656, 249.3125, 471, 648, 429.02344, 621.7969, 469.96875, 727, 784.21094, 821.9219, 782.21094, 821.0625, 907.35156, 802.9297, 907.9922, 553.1406, 907.03125, 656.03906, 788.10156, -395, 527.7422, -395, 587.8906, -568, 586.10156, -568, 463.3125, 1226.0625, 269, 1750.9375, 269, 1749.0469, 586.84375, 1685.1563, 585.84375, 1227.0625, 429.02344, 308.96094, -208.02344, 821.9219, -207.00781, 821.0625, -86.36719, 642.53125, -117.00781, -153, -207.97656, -153, -467.96875, 309.96094, -467.02344, 554.85156, 787.09375, 654.96094, 523.8906, 727, 468.9375, -682.0469, 329.96875, -330.95313, 330.96875, -330.03906, 522.7422, -633.3281, 432.3203, -663, 394.70313, 1684.1484, 650.9297, 1258.8281, 648.0625, 1257.8438, 587.2969, 1225.9063, 586.2969, 1224.9063, 472.0625, 760, 427.97656, -663, 431.32813, -632.3281, 461.28906, -729.97656, 396.6875, -729.0078, -208.97656, -679.9531, -114.97656, 760, -82.36719, 648, -82.78906, 622.8203, 520.8672)
@@ -36,7 +37,35 @@ tile_set = ExtResource("2_hlk0d")
 metadata/_edit_lock_ = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_hlk0d")
+
+[node name="Upgrade1" parent="." instance=ExtResource("7_0uv0p")]
+modulate = Color(1.1801987, 0, 0.124178976, 1)
+position = Vector2(692, 883)
+
+[node name="Upgrade2" parent="." instance=ExtResource("7_0uv0p")]
+modulate = Color(0, 1.179842, 0, 1)
+position = Vector2(-120, -341)
+upgrade_type = "speed"
+cost = 4000
+hold_time = 2.5
+
+[node name="Upgrade3" parent="." instance=ExtResource("7_0uv0p")]
+modulate = Color(0, 0, 1.179842, 1)
+position = Vector2(-352, 429)
+upgrade_type = "rapid_fire"
+cost = 7000
+hold_time = 4.0
+
+[node name="Upgrade4" parent="." instance=ExtResource("7_0uv0p")]
+position = Vector2(1710, 417)
+upgrade_type = "dmg"
+cost = 10000
+hold_time = 5.0
+
+[node name="AnimatedSprite2D" parent="Upgrade4" index="1"]
+modulate = Color(0, 0, 0, 1)
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
@@ -125,3 +154,5 @@ position = Vector2(-13.000008, 377)
 bullet_scene = ExtResource("2_d1c63")
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
+
+[editable path="Upgrade4"]

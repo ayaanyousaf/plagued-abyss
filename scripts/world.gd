@@ -1,7 +1,7 @@
 extends Node2D
 
 signal player_died(final_wave)
-signal player_hp_updated(hp)
+signal player_hp_updated(hp, max_hp)
 signal wave_started(wave)
 signal score_updated(score)
 
@@ -51,8 +51,8 @@ func connect_enemy_signals(enemy):
 func _on_player_died() -> void:
 	player_died.emit(current_wave) # World forwards signal telling main that player died
 
-func _on_player_hp_updated(hp: int) -> void: 
-	player_hp_updated.emit(hp)
+func _on_player_hp_updated(hp: int, max_hp: int) -> void: 
+	player_hp_updated.emit(hp, max_hp)
 	
 func _on_enemy_hit(points: int) -> void: 
 	score += points # update score when enemy gets hit
@@ -61,4 +61,15 @@ func _on_enemy_hit(points: int) -> void:
 func _on_enemy_died(points: int) -> void: 
 	score += points # update score when enemy dies
 	score_updated.emit(score)
+	
+func can_afford(cost: int) -> bool: 
+	return score >= cost
+	
+func spend_points(amount: int) -> bool: 
+	if score < amount: 
+		return false
+		
+	score -= amount
+	score_updated.emit(score)
+	return true
 	
