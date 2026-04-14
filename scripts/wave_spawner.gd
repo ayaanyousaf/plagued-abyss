@@ -1,10 +1,10 @@
 extends Node2D
 
 @export var enemy_scene: PackedScene
-@export var spawn_radius = 500.0
 
 @onready var player = $"../Player"
 @onready var enemies = $"../Enemies"
+@onready var spawn_points = $"../SpawnPoints"
 
 var spawned_enemies: int = 0 # total enemies spawned so far
 var total_enemies: int = 0 # total number of enemies for the wave
@@ -37,7 +37,27 @@ func spawn_enemy():
 	spawned_enemies += 1
 
 func get_enemy_position(): 
-	var angle = randf() * TAU
-	var offset = Vector2(cos(angle), sin(angle)) * spawn_radius
+	var possible_spawn_points = []
 	
-	return player.global_position + offset
+	for point in spawn_points.get_children(): 
+		if not point is Marker2D: 
+			continue
+			
+		# Block spawns from end game rooms early on
+		if player.global_position.x > -260 and point.global_position.x < -260: 
+			continue
+		if player.global_position.x < -260 and point.global_position.x > -260: 
+			continue
+			
+		var distance = point.global_position.distance_to(player.global_position)
+		
+		if distance > 150 and distance < 500: 
+			possible_spawn_points.append(point)
+			
+	if possible_spawn_points.is_empty():
+		return Vector2.ZERO
+	
+	var chosen_spawn = possible_spawn_points[randi() % possible_spawn_points.size()]
+	var offset = Vector2(randf_range(-20, 20), randf_range(-20, 20))
+	
+	return chosen_spawn.global_position + offset
