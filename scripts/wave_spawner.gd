@@ -29,6 +29,11 @@ func spawn_enemy():
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = get_enemy_position()
 	enemies.add_child(enemy)
+	
+	# When a new enemy is spawned, connect its signals to world to update score
+	var world = get_parent()
+	world.connect_enemy_signals(enemy)
+	
 	spawned_enemies += 1
 
 func get_enemy_position(): 

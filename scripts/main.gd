@@ -11,6 +11,7 @@ extends Node2D
 
 @onready var wave_label = $UI/Game/Wave
 @onready var hp_bar = $UI/Game/HealthBar
+@onready var score_label = $UI/Game/Score
 
 # Define game states
 enum GameState {
@@ -37,10 +38,11 @@ func start_game():
 	current_world = world_scene.instantiate()
 	world_container.add_child(current_world)
 	
-	# Connect signals from world (wave count and player death)
+	# Connect signals from world (wave count, player death, score updates)
 	current_world.player_died.connect(_on_player_died)
 	current_world.wave_started.connect(_on_wave_started)
 	current_world.player_hp_updated.connect(_on_player_hp_updated)
+	current_world.score_updated.connect(_on_score_updated)
 	
 	change_state(GameState.PLAY)
 
@@ -89,6 +91,9 @@ func _on_player_died(final_wave: int) -> void:
 
 func _on_player_hp_updated(hp: int) -> void: 
 	hp_bar.value = hp
+	
+func _on_score_updated(score: int) -> void: 
+	score_label.text = str(score)
 	
 func _on_wave_started(wave: int) -> void: 
 	wave_label.text = "Wave " + str(wave)

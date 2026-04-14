@@ -8,6 +8,10 @@ const STOP_DISTANCE = 20.0 # closest the enemy can get to player (no complete ov
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 
+# Point system signals
+signal hit(points)
+signal died(points)
+
 var hp = 2
 var player: CharacterBody2D = null
 var player_in_range = false # checks if player is in attack range
@@ -62,8 +66,11 @@ func attack():
 
 # Computes amount of damage taken by the enemy
 func take_damage(amount): 
+	hit.emit(10) # give player 10 points for a successful hit
+	
 	hp -= amount
 	if hp <= 0: 
+		died.emit(50) # give player 50 points for a successful kill
 		queue_free()
 
 # Detects if player entered attack range

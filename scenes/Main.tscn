@@ -236,6 +236,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="UIFrame" type="TextureRect" parent="UI/Game"]
+modulate = Color(1.009993, 0.037908014, 1.4687854, 1)
 layout_mode = 0
 offset_left = -47.0
 offset_top = -123.99999
@@ -243,6 +244,7 @@ offset_right = 2041.3333
 offset_bottom = 1422.6666
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_jlsqs")
+metadata/_edit_lock_ = true
 
 [node name="Wave" type="Label" parent="UI/Game"]
 layout_mode = 0
@@ -250,7 +252,7 @@ offset_left = 945.0
 offset_top = 573.0
 offset_right = 1101.0
 offset_bottom = 657.0
-theme_override_colors/font_color = Color(3.8665109, 2.8461382, 3.8665109, 1)
+theme_override_colors/font_color = Color(17.554007, 0, 18.11744, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_lhr70")
@@ -270,17 +272,17 @@ step = 1.0
 value = 3.0
 show_percentage = false
 
-[node name="Points" type="Label" parent="UI/Game"]
+[node name="Score" type="Label" parent="UI/Game"]
 layout_mode = 0
 offset_left = 82.0
 offset_top = 5.0
 offset_right = 256.0
 offset_bottom = 61.0
-theme_override_colors/font_color = Color(3.3904092, 3.3904092, 3.3904092, 1)
+theme_override_colors/font_color = Color(3.1727057, 0.0129804155, 3.1978984, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.827451)
 theme_override_fonts/font = ExtResource("9_q8u5g")
 theme_override_font_sizes/font_size = 44
-text = "999999"
+text = "0"
 
 [node name="GameOver" type="Control" parent="UI"]
 visible = false
