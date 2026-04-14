@@ -5,13 +5,16 @@ signal died
 signal hp_updated(hp)
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+
 @onready var fire_rate: Timer = $FireRate
+@onready var regen_tick: Timer = $HealthRegenTick
+@onready var regen_delay: Timer = $HealthRegenDelay
 
 const SPEED = 180.0
+var max_hp = 3
 var hp = 3
 var taken_damage = false
 var can_shoot = true
-
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -62,6 +65,10 @@ func take_damage(amount):
 	taken_damage = true
 	$DamageCooldown.start()
 	
+	# health regen timers
+	regen_tick.stop()
+	regen_delay.start()
+	
 	if hp <= 0: 
 		die()
 
@@ -75,3 +82,15 @@ func _on_damage_cooldown_timeout() -> void:
 
 func _on_fire_rate_timeout() -> void:
 	can_shoot = true
+
+func _on_health_regen_delay_timeout() -> void:
+	if hp < max_hp: 
+		regen_tick.start()
+
+func _on_health_regen_tick_timeout() -> void:
+	if hp < max_hp: 
+		hp += 1
+		hp_updated.emit(hp)
+		
+	if hp >= max_hp: 
+		regen_tick.stop()

@@ -190,7 +190,7 @@ scale = Vector2(0.20966454, 0.21074876)
 sprite_frames = SubResource("SpriteFrames_p0vlq")
 animation = &"Idle"
 autoplay = "Move"
-frame_progress = 0.23602481
+frame_progress = 0.7419781
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -216,5 +216,14 @@ position_smoothing_enabled = true
 wait_time = 0.2
 one_shot = true
 
+[node name="HealthRegenTick" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="HealthRegenDelay" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
+[connection signal="timeout" from="HealthRegenTick" to="." method="_on_health_regen_tick_timeout"]
+[connection signal="timeout" from="HealthRegenDelay" to="." method="_on_health_regen_delay_timeout"]
