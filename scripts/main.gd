@@ -13,6 +13,9 @@ extends Node2D
 @onready var hp_bar = $UI/Game/HealthBar
 @onready var score_label = $UI/Game/Score
 
+@onready var menu_music: AudioStreamPlayer = $MenuMusic
+@onready var gameplay_music: AudioStreamPlayer = $GameMusic
+
 # Define game states
 enum GameState {
 	MENU,
@@ -73,6 +76,21 @@ func change_state(state):
 	menu_UI.visible = (state == GameState.MENU)
 	game_UI.visible = (state == GameState.PLAY)
 	gameover_UI.visible = (state == GameState.GAME_OVER)
+	
+	# Play appropriate music depending on game state
+	if state == GameState.MENU: 
+		if not menu_music.playing: 
+			menu_music.play()
+		gameplay_music.stop()
+	
+	if state == GameState.PLAY: 
+		if not gameplay_music.playing: 
+			gameplay_music.play()
+		menu_music.stop()
+		
+	if state == GameState.GAME_OVER: 
+		gameplay_music.stop()
+		menu_music.stop()
 	
 # Handles "Exit" button press in main menu
 func _on_exit_pressed() -> void:

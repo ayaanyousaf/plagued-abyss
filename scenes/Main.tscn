@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bu6m5umpoko53"]
+[gd_scene load_steps=23 format=3 uid="uid://bu6m5umpoko53"]
 
 [ext_resource type="Script" uid="uid://bfbkqg2lysug5" path="res://scripts/main.gd" id="1_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://dhcc34md8r576" path="res://scenes/World.tscn" id="2_c01mt"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://b827me0hi5tcw" path="res://assets/x_button.png" id="8_jlsqs"]
 [ext_resource type="FontFile" uid="uid://bnukulmqy6kyv" path="res://assets/fonts/wave_font.ttf" id="9_lhr70"]
 [ext_resource type="FontFile" uid="uid://de8brq84d6xfs" path="res://assets/fonts/points_font.ttf" id="9_q8u5g"]
+[ext_resource type="AudioStream" uid="uid://cm3o1u702876g" path="res://assets/Music/MenuMusic.mp3" id="11_wp0k4"]
+[ext_resource type="AudioStream" uid="uid://mriy88r5scuj" path="res://assets/Music/GameplayMusic.mp3" id="12_bjd11"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vcsgt"]
 texture = ExtResource("4_rarhs")
@@ -336,6 +338,15 @@ theme_override_font_sizes/font_size = 32
 text = "Click ENTER to continue"
 
 [node name="WorldContainer" type="Node2D" parent="."]
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_wp0k4")
+parameters/looping = true
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_bjd11")
+volume_db = -20.0
+parameters/looping = true
 
 [connection signal="pressed" from="UI/Menu/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="UI/Menu/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
