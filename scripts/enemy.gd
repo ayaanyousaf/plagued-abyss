@@ -6,10 +6,13 @@ const STOP_DISTANCE = 20.0 # closest the enemy can get to player (no complete ov
 @onready var attack_range: Area2D = $AttackRange
 @onready var attack_cooldown: Timer = $AttackCooldown
 
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+
 var hp = 2
 var player: CharacterBody2D = null
 var player_in_range = false # checks if player is in attack range
 var can_attack = true # tracks if attack cooldown is active or not
+var is_attacking = false
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
@@ -31,13 +34,27 @@ func _physics_process(delta: float) -> void:
 	look_at(player.global_position)
 	
 	# Attack player if in range
-	if player_in_range and can_attack: 
+	if player_in_range and can_attack and not is_attacking: 
 		attack()
-
+		return
+	
+	# Switch between idle and move animations without interrupting attack animation
+	if not is_attacking: 
+		if velocity.length() > 0.1: 
+			if animation.animation != "Move": 
+				animation.play("Move")
+		else: 
+			if animation.animation != "Idle": 
+				animation.play("Idle")
+	
 # Performs an attack on the player 
 func attack(): 
 	if player == null: 
 		return
+		
+	is_attacking = true
+	velocity = Vector2.ZERO
+	animation.play("Attack")
 		
 	can_attack = false 
 	player.take_damage(1)
@@ -62,3 +79,8 @@ func _on_attack_range_body_exited(body: Node2D) -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	can_attack = true
+
+# Checks if the current animation has finished
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animation.animation == "Attack": 
+		is_attacking = false
