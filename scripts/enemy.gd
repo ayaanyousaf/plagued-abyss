@@ -7,6 +7,7 @@ const STOP_DISTANCE = 20.0 # closest the enemy can get to player (no complete ov
 @onready var attack_cooldown: Timer = $AttackCooldown
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 # Point system signals
 signal hit(points)
@@ -25,14 +26,16 @@ func _physics_process(delta: float) -> void:
 	if player == null: 
 		return
 		
-	var to_player_vector = player.global_position - global_position
-	var to_player_distance = to_player_vector.length()
+	nav_agent.target_position = player.global_position
 	
-	if to_player_distance > STOP_DISTANCE: 
-		var direction = to_player_vector.normalized()
+	var distance_to_player = global_position.distance_to(player.global_position)
+	
+	if distance_to_player > STOP_DISTANCE: 
+		var next_path_pos = nav_agent.get_next_path_position()
+		var direction = global_position.direction_to(next_path_pos)
 		velocity = direction * SPEED
 	else: 
-		velocity = Vector2.ZERO # stop the enemy when it reaches (hits) player
+		velocity = Vector2.ZERO
 
 	move_and_slide()
 	look_at(player.global_position)
