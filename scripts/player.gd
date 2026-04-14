@@ -5,10 +5,12 @@ signal died
 signal hp_updated(hp)
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var fire_rate: Timer = $FireRate
 
 const SPEED = 180.0
 var hp = 3
 var taken_damage = false
+var can_shoot = true
 
 
 func _physics_process(delta: float) -> void:
@@ -32,11 +34,13 @@ func _physics_process(delta: float) -> void:
 	else: 
 		animation.play("Idle")
 	
-	# Shoot logic
-	if (Input.is_action_just_pressed("shoot")):
+	# Shooting logic with fire rate timer
+	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot()
 	
 func shoot(): 
+	can_shoot = false
+	
 	var mouse_position = get_global_mouse_position()
 	var barrel = $Barrel
 	var bullet = bullet_scene.instantiate()
@@ -44,6 +48,8 @@ func shoot():
 	
 	bullet.direction = (mouse_position - barrel.global_position).normalized()
 	get_parent().get_node("Bullets").add_child(bullet)
+	
+	fire_rate.start()
 
 func take_damage(amount): 
 	if taken_damage: 
@@ -60,9 +66,12 @@ func take_damage(amount):
 		die()
 
 func die(): 
-	print("Game Over. You survived ____ waves.")
+	print("Player died. Game over.")
 	died.emit()
 	queue_free()	
 
 func _on_damage_cooldown_timeout() -> void:
 	taken_damage = false
+
+func _on_fire_rate_timeout() -> void:
+	can_shoot = true

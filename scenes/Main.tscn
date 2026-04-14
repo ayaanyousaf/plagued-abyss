@@ -66,6 +66,7 @@ world_scene = ExtResource("2_c01mt")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Menu" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

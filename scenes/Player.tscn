@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://crc1ipkq74klg"]
+[gd_scene load_steps=44 format=3 uid="uid://crc1ipkq74klg"]
 
 [ext_resource type="Script" uid="uid://273veky4cjks" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://cm6gp6y5adwyb" path="res://assets/player_sprites/idle/survivor-idle_rifle_0.png" id="2_gv3ic"]
@@ -179,9 +179,6 @@ animations = [{
 radius = 11.428571
 height = 34.285713
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
-size = Vector2(42, 25)
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_p0vlq")
@@ -193,7 +190,7 @@ scale = Vector2(0.20966454, 0.21074876)
 sprite_frames = SubResource("SpriteFrames_p0vlq")
 animation = &"Idle"
 autoplay = "Move"
-frame_progress = 0.6683344
+frame_progress = 0.23602481
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -203,13 +200,6 @@ shape = SubResource("CapsuleShape2D_tk6la")
 
 [node name="Barrel" type="Marker2D" parent="."]
 position = Vector2(22, 7)
-
-[node name="HurtBox" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-6, 0.5)
-shape = SubResource("RectangleShape2D_v6fml")
 
 [node name="DamageCooldown" type="Timer" parent="."]
 one_shot = true
@@ -222,4 +212,9 @@ limit_right = 2157
 limit_bottom = 1107
 position_smoothing_enabled = true
 
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]
+[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
