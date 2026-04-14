@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://crc1ipkq74klg"]
+[gd_scene load_steps=48 format=3 uid="uid://crc1ipkq74klg"]
 
 [ext_resource type="Script" uid="uid://273veky4cjks" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://cm6gp6y5adwyb" path="res://assets/player_sprites/idle/survivor-idle_rifle_0.png" id="2_gv3ic"]
@@ -41,6 +41,10 @@
 [ext_resource type="Texture2D" uid="uid://celn4dljwbvi1" path="res://assets/player_sprites/move/survivor-move_rifle_17.png" id="39_qduiv"]
 [ext_resource type="Texture2D" uid="uid://diy16m3fsor7h" path="res://assets/player_sprites/move/survivor-move_rifle_18.png" id="40_7yj0e"]
 [ext_resource type="Texture2D" uid="uid://55najtx8o1so" path="res://assets/player_sprites/move/survivor-move_rifle_19.png" id="41_c0jld"]
+[ext_resource type="AudioStream" uid="uid://diqwna7lmbcrs" path="res://assets/SFX/Hurt.mp3" id="42_yrxk4"]
+[ext_resource type="AudioStream" uid="uid://csth7e8cyoqkf" path="res://assets/SFX/Shoot.mp3" id="43_eg1p0"]
+[ext_resource type="AudioStream" uid="uid://b81vwv7xma260" path="res://assets/SFX/Purchase.mp3" id="44_x2u8p"]
+[ext_resource type="AudioStream" uid="uid://iq70tif3vpbc" path="res://assets/SFX/Footsteps.mp3" id="45_qv10x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p0vlq"]
 animations = [{
@@ -190,7 +194,7 @@ scale = Vector2(0.20966454, 0.21074876)
 sprite_frames = SubResource("SpriteFrames_p0vlq")
 animation = &"Idle"
 autoplay = "Move"
-frame_progress = 0.81024545
+frame_progress = 0.25369558
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -222,6 +226,23 @@ wait_time = 1.5
 [node name="HealthRegenDelay" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("42_yrxk4")
+volume_db = -20.0
+
+[node name="ShootSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("43_eg1p0")
+volume_db = -30.0
+
+[node name="PurchaseSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("44_x2u8p")
+volume_db = -5.0
+
+[node name="FootstepsSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("45_qv10x")
+volume_db = -20.0
+parameters/looping = true
 
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]

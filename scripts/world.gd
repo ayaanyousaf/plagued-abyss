@@ -9,6 +9,8 @@ signal score_updated(score)
 @onready var enemies = $Enemies
 @onready var wave_spawner = $WaveSpawner
 
+@onready var zombie_SFX: AudioStreamPlayer2D = $ZombieSFX
+
 var current_wave = 1 # Initialize wave
 var waiting_for_next_wave = false
 
@@ -32,6 +34,14 @@ func _process(delta: float) -> void:
 	if wave_spawner.spawned_enemies >= wave_spawner.total_enemies and enemies.get_child_count() == 0: 
 		waiting_for_next_wave = true
 		start_next_wave()
+		
+	# Zombie growl ambience while enemies are spawned
+	if enemies.get_child_count() > 0: 
+		if not zombie_SFX.playing: 
+			zombie_SFX.play(randf_range(0, 8))
+	else: 
+		if zombie_SFX.playing: 
+			zombie_SFX.stop()
 	
 func start_wave(): 
 	wave_started.emit(current_wave)

@@ -9,6 +9,12 @@ signal hp_updated(hp, max_hp)
 @onready var regen_tick: Timer = $HealthRegenTick
 @onready var regen_delay: Timer = $HealthRegenDelay
 
+@onready var footsteps_SFX: AudioStreamPlayer2D = $FootstepsSFX
+@onready var hurt_SFX: AudioStreamPlayer2D = $HurtSFX
+@onready var shoot_SFX: AudioStreamPlayer2D = $ShootSFX
+@onready var purchase_SFX: AudioStreamPlayer2D = $PurchaseSFX
+
+const base_speed = 180.0
 var move_speed = 180.0
 var max_hp = 3
 var hp = 3
@@ -37,8 +43,18 @@ func _physics_process(delta: float) -> void:
 	# Switch between idle and move animations
 	if direction != Vector2.ZERO: 
 		animation.play("Move")
+		
+		if not footsteps_SFX.playing:  # footstep SFX while moving
+			footsteps_SFX.play()
 	else: 
 		animation.play("Idle")
+		
+		if footsteps_SFX.playing: 
+			footsteps_SFX.stop()
+			
+	# Scale footsteps SFX pitch with movement speed
+	if footsteps_SFX.playing: 
+		footsteps_SFX.pitch_scale = move_speed / base_speed
 	
 	# Shooting logic with fire rate timer
 	if Input.is_action_pressed("shoot") and can_shoot:
@@ -46,6 +62,8 @@ func _physics_process(delta: float) -> void:
 	
 func shoot(): 
 	can_shoot = false
+	
+	shoot_SFX.play()
 	
 	var mouse_position = get_global_mouse_position()
 	var barrel = $Barrel
@@ -66,6 +84,7 @@ func take_damage(amount):
 	hp -= amount
 	hp_updated.emit(hp, max_hp) # send hp signal to World scene
 	print("Player HP:", hp) # log the players health (debug)
+	hurt_SFX.play()
 	
 	taken_damage = true
 	$DamageCooldown.start()
@@ -101,6 +120,8 @@ func apply_upgrade(upgrade_type: String) -> bool:
 			return false
 			
 	purchased_upgrades.append(upgrade_type)
+	purchase_SFX.play()
+	
 	return true
 			
 

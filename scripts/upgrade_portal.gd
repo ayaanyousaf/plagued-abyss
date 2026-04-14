@@ -7,6 +7,7 @@ extends Area2D
 @onready var hold_timer: Timer = $HoldTimer
 @onready var prompt_label: Label = $Prompt
 @onready var progress_bar: ProgressBar = $ProgressBar
+@onready var denied_SFX: AudioStreamPlayer2D = $DeniedSFX
 
 var player_in_range = false
 var player: CharacterBody2D = null
@@ -104,6 +105,7 @@ func _on_hold_timer_timeout() -> void:
 	
 	if not world.can_afford(cost): 
 		prompt_label.text = "Not enough points"
+		denied_SFX.play()
 		return
 		
 	var applied = player.apply_upgrade(upgrade_type)

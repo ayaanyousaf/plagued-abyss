@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b25eqd1hsmbac"]
+[gd_scene load_steps=48 format=3 uid="uid://b25eqd1hsmbac"]
 
 [ext_resource type="Script" uid="uid://ciey7f0ey7d3u" path="res://scripts/upgrade_portal.gd" id="1_mlc7i"]
 [ext_resource type="Texture2D" uid="uid://53qeafjv1wy8" path="res://assets/Portal/Portal_100x100px1.png" id="1_q6xfk"]
@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://dkdgm455jh4ms" path="res://assets/Portal/Portal_100x100px40.png" id="40_e8s8s"]
 [ext_resource type="Texture2D" uid="uid://cy62hbvc8g7tq" path="res://assets/Portal/Portal_100x100px41.png" id="41_qatbk"]
 [ext_resource type="FontFile" uid="uid://dvw5ocmoil4p4" path="res://assets/fonts/BebasNeue-Regular.ttf" id="43_pg1lf"]
+[ext_resource type="AudioStream" uid="uid://t3xq3c5mlty7" path="res://assets/SFX/Denied.mp3" id="44_7ntjt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mlc7i"]
 size = Vector2(97.5, 117.5)
@@ -199,7 +200,7 @@ metadata/_edit_lock_ = true
 sprite_frames = SubResource("SpriteFrames_xtx5f")
 animation = &"Glow"
 autoplay = "Glow"
-frame_progress = 0.0067018033
+frame_progress = 0.6932256
 metadata/_edit_lock_ = true
 
 [node name="HoldTimer" type="Timer" parent="."]
@@ -230,6 +231,10 @@ rotation = 1.5707964
 theme_override_styles/background = SubResource("StyleBoxFlat_pg1lf")
 fill_mode = 3
 show_percentage = false
+
+[node name="DeniedSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("44_7ntjt")
+volume_db = -5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
