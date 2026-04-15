@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var enemy_scene: PackedScene
+@export var unlocked: bool = true
 
 @onready var player = $"../Player"
 @onready var enemies = $"../Enemies"
@@ -38,15 +39,19 @@ func spawn_enemy():
 
 func get_enemy_position(): 
 	var possible_spawn_points = []
+	var world = get_parent()
 	
 	for point in spawn_points.get_children(): 
 		if not point is Marker2D: 
 			continue
-			
-		# Block spawns from end game rooms early on
-		if player.global_position.x > -260 and point.global_position.x < -260: 
-			continue
-		if player.global_position.x < -260 and point.global_position.x > -260: 
+		
+		var spawn_allowed = false
+		for room in world.unlocked_rooms: 
+			if point.is_in_group(room):
+				spawn_allowed = true
+				break
+		
+		if not spawn_allowed: 
 			continue
 			
 		var distance = point.global_position.distance_to(player.global_position)

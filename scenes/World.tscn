@@ -144,76 +144,76 @@ modulate = Color(0, 0, 0, 1)
 [node name="SpawnPoints" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(191, 224)
 
-[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(-112, 209)
 
-[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(-114, 524)
 
-[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(848, 438)
 
-[node name="Spawn5" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn5" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(1022, 468)
 
-[node name="Spawn6" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn6" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(568, 843)
 
-[node name="Spawn7" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn7" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(806, 797)
 
-[node name="Spawn8" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn8" type="Marker2D" parent="SpawnPoints" groups=["starting_room"]]
 position = Vector2(625, 514)
 
-[node name="Spawn9" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn9" type="Marker2D" parent="SpawnPoints" groups=["room_3"]]
 position = Vector2(1246, 279)
 
-[node name="Spawn10" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn10" type="Marker2D" parent="SpawnPoints" groups=["room_3"]]
 position = Vector2(1502, 278)
 
-[node name="Spawn11" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn11" type="Marker2D" parent="SpawnPoints" groups=["room_3"]]
 position = Vector2(1661, 276)
 
-[node name="Spawn12" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn12" type="Marker2D" parent="SpawnPoints" groups=["room_3"]]
 position = Vector2(1291, 632)
 
-[node name="Spawn13" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn13" type="Marker2D" parent="SpawnPoints" groups=["room_3"]]
 position = Vector2(1485, 634)
 
-[node name="Spawn14" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn14" type="Marker2D" parent="SpawnPoints" groups=["room_3"]]
 position = Vector2(1732, 571)
 
-[node name="Spawn15" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn15" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
 position = Vector2(652, 152)
 
-[node name="Spawn16" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn16" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
 position = Vector2(806, -193)
 
-[node name="Spawn17" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn17" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
 position = Vector2(220, -123)
 
-[node name="Spawn18" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn18" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
 position = Vector2(295, -340)
 
-[node name="Spawn19" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn19" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
 position = Vector2(85, -453)
 
-[node name="Spawn20" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn20" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
 position = Vector2(-127, -448)
 
-[node name="Spawn21" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn21" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
 position = Vector2(-121, -240)
 
-[node name="Spawn22" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn22" type="Marker2D" parent="SpawnPoints" groups=["room_2"]]
 position = Vector2(-719, -198)
 
-[node name="Spawn23" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn23" type="Marker2D" parent="SpawnPoints" groups=["room_2"]]
 position = Vector2(-607, 443)
 
-[node name="Spawn24" type="Marker2D" parent="SpawnPoints"]
+[node name="Spawn24" type="Marker2D" parent="SpawnPoints" groups=["room_2"]]
 position = Vector2(-419, 568)
 
 [node name="Enemies" type="Node2D" parent="."]

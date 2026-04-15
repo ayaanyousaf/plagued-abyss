@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 player=""
 enemy=""
+starting_room=""
+room_1=""
+room_2=""
+room_3=""
 
 [input]
 

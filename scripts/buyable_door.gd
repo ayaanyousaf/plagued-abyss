@@ -2,6 +2,7 @@ extends Area2D
 
 @export var cost: int = 1000
 @export var hold_time: float = 1.5
+@export var room_to_unlock: String = ""
 
 @onready var closed_sprite: Sprite2D = $ClosedSprite
 @onready var open_sprite: Sprite2D = $OpenSprite
@@ -109,6 +110,9 @@ func _on_hold_timer_timeout() -> void:
 	
 	purchased = true
 	purchase_sfx.play()
+	
+	if room_to_unlock != "": 
+		world.unlock_room(room_to_unlock)
 	
 	blocker.set_deferred("disabled", true)
 	closed_sprite.visible = false

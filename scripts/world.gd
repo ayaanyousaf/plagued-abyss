@@ -13,6 +13,7 @@ signal score_updated(score)
 
 var current_wave = 1 # Initialize wave
 var waiting_for_next_wave = false
+var unlocked_rooms: Array[String] = ["starting_room"]
 
 var score = 0
 
@@ -53,6 +54,14 @@ func start_next_wave():
 	current_wave += 1
 	waiting_for_next_wave = false
 	start_wave()
+
+func is_room_unlcoked(room: String): 
+	return room in unlocked_rooms
+
+func unlock_room(room: String): 
+	if room not in unlocked_rooms: 
+		unlocked_rooms.append(room)
+		print("Unlocked room: ", room)
 	
 func connect_enemy_signals(enemy): 
 	enemy.hit.connect(_on_enemy_hit)
