@@ -200,7 +200,7 @@ shape = SubResource("RectangleShape2D_mlc7i")
 sprite_frames = SubResource("SpriteFrames_xtx5f")
 animation = &"Glow"
 autoplay = "Glow"
-frame_progress = 0.08734444
+frame_progress = 0.49480915
 metadata/_edit_lock_ = true
 
 [node name="HoldTimer" type="Timer" parent="."]
