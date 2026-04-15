@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Abyssal-Outbreak"
+config/name="Plagued-Abyss"
 run/main_scene="uid://bu6m5umpoko53"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
