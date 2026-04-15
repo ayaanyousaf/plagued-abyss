@@ -17,6 +17,7 @@ var waiting_for_next_wave = false
 var unlocked_rooms: Array[String] = ["starting_room"]
 
 var score = 0
+var game_over = false
 
 func _ready() -> void:
 	score = 0 # reset score 
@@ -27,6 +28,9 @@ func _ready() -> void:
 	start_wave()
 
 func _process(delta: float) -> void: 
+	if game_over:
+		return
+		
 	if waiting_for_next_wave: 
 		return
 		
@@ -74,6 +78,10 @@ func connect_enemy_signals(enemy):
 	enemy.died.connect(_on_enemy_died)
 
 func _on_player_died() -> void:
+	game_over = true
+	
+	if zombie_SFX.playing: 
+		zombie_SFX.stop()
 	player_died.emit(current_wave) # World forwards signal telling main that player died
 
 func _on_player_hp_updated(hp: int, max_hp: int) -> void: 

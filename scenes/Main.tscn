@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bu6m5umpoko53"]
+[gd_scene load_steps=24 format=3 uid="uid://bu6m5umpoko53"]
 
 [ext_resource type="Script" uid="uid://bfbkqg2lysug5" path="res://scripts/main.gd" id="1_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://dhcc34md8r576" path="res://scenes/World.tscn" id="2_c01mt"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://de8brq84d6xfs" path="res://assets/fonts/points_font.ttf" id="9_q8u5g"]
 [ext_resource type="AudioStream" uid="uid://cm3o1u702876g" path="res://assets/Music/MenuMusic.mp3" id="11_wp0k4"]
 [ext_resource type="AudioStream" uid="uid://mriy88r5scuj" path="res://assets/Music/GameplayMusic.mp3" id="12_bjd11"]
+[ext_resource type="AudioStream" uid="uid://ci840wipt7d16" path="res://assets/SFX/Death.mp3" id="13_qmy6f"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vcsgt"]
 texture = ExtResource("4_rarhs")
@@ -60,7 +61,7 @@ corner_radius_bottom_left = 2
 shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c01mt"]
-bg_color = Color(0.049475692, 0.039731156, 0.0053792885, 1)
+bg_color = Color(0.05490196, 0.015686275, 0.05490196, 0.4862745)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_nxtc6")
@@ -213,24 +214,28 @@ offset_right = 202.5
 offset_bottom = 89.5
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Movement" type="Label" parent="UI/Menu/ControlsOverlay/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_bjd11")
 theme_override_font_sizes/font_size = 48
 text = "WASD - Move"
+horizontal_alignment = 1
 
 [node name="Shoot" type="Label" parent="UI/Menu/ControlsOverlay/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_bjd11")
 theme_override_font_sizes/font_size = 48
 text = "Left Click - Shoot"
+horizontal_alignment = 1
 
 [node name="Interact" type="Label" parent="UI/Menu/ControlsOverlay/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_bjd11")
 theme_override_font_sizes/font_size = 48
 text = "F - Interact"
+horizontal_alignment = 1
 
 [node name="Game" type="Control" parent="UI"]
 layout_mode = 3
@@ -291,7 +296,6 @@ theme_override_font_sizes/font_size = 44
 text = "0"
 
 [node name="GameOver" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -311,17 +315,21 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_c01mt")
 
 [node name="GameOverMessage" type="Label" parent="UI/GameOver"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -321.0
-offset_top = 232.0
-offset_right = 318.0
-offset_bottom = 304.0
+anchor_bottom = 0.5
+offset_left = -319.5
+offset_top = -54.0
+offset_right = 319.5
+offset_bottom = 18.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_lhr70")
 theme_override_font_sizes/font_size = 52
-text = "YOU SURVIVED 0 WAVES"
+text = "YOU SURVIVED 1 WAVE"
+horizontal_alignment = 1
 
 [node name="Continue" type="Label" parent="UI/GameOver"]
 layout_mode = 1
@@ -350,6 +358,10 @@ parameters/looping = true
 stream = ExtResource("12_bjd11")
 volume_db = -20.0
 parameters/looping = true
+
+[node name="PlayerDeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_qmy6f")
+volume_db = -5.0
 
 [connection signal="pressed" from="UI/Menu/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="UI/Menu/VBoxContainer/Controls" to="." method="_on_controls_pressed"]

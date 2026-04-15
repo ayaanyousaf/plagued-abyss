@@ -15,6 +15,7 @@ extends Node2D
 
 @onready var menu_music: AudioStreamPlayer = $MenuMusic
 @onready var gameplay_music: AudioStreamPlayer = $GameMusic
+@onready var player_death_sfx: AudioStreamPlayer2D = $PlayerDeathSFX
 
 # Define game states
 enum GameState {
@@ -50,13 +51,12 @@ func start_game():
 	change_state(GameState.PLAY)
 
 func end_game(final_wave): 
-	clear_world()
 	change_state(GameState.GAME_OVER)
-	
 	game_over_message.text = "You survived " + str(final_wave) + " waves" 
 	
 	if Input.is_action_just_pressed("continue"): 
 		change_state(GameState.MENU)
+		clear_world()
 
 # Resets world state
 func clear_world() -> void: 
@@ -108,6 +108,7 @@ func _on_close_controls_pressed() -> void:
 	controls_overlay.visible = false
 	
 func _on_player_died(final_wave: int) -> void: 
+	player_death_sfx.play()
 	end_game(final_wave)
 
 func _on_player_hp_updated(hp: int, max_hp: int) -> void: 
