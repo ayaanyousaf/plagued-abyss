@@ -10,6 +10,7 @@ signal score_updated(score)
 @onready var wave_spawner = $WaveSpawner
 
 @onready var zombie_SFX: AudioStreamPlayer2D = $ZombieSFX
+@onready var wave_transition: AudioStreamPlayer2D = $WaveTransition
 
 var current_wave = 1 # Initialize wave
 var waiting_for_next_wave = false
@@ -50,7 +51,12 @@ func start_wave():
 	
 # Starts the next wave and updates wave counter
 func start_next_wave(): 
+	# Play wave transition sound
+	if not wave_transition.playing: 
+		wave_transition.play()
+	
 	await get_tree().create_timer(10.0).timeout # delay before next wave starts
+	
 	current_wave += 1
 	waiting_for_next_wave = false
 	start_wave()

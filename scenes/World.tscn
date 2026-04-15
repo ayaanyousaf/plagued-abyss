@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dhcc34md8r576"]
+[gd_scene load_steps=14 format=4 uid="uid://dhcc34md8r576"]
 
 [ext_resource type="PackedScene" uid="uid://crc1ipkq74klg" path="res://scenes/Player.tscn" id="1_7g83o"]
 [ext_resource type="Script" uid="uid://cq26ncnek7fnh" path="res://scripts/world.gd" id="1_d1c63"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b25eqd1hsmbac" path="res://scenes/UpgradePortal.tscn" id="7_0uv0p"]
 [ext_resource type="AudioStream" uid="uid://bo7xt6g2l4ck" path="res://assets/SFX/Zombie.mp3" id="8_b3faq"]
 [ext_resource type="PackedScene" uid="uid://bn2dg0gbn0h7v" path="res://scenes/BuyableDoor.tscn" id="9_ygioq"]
+[ext_resource type="AudioStream" uid="uid://bjogdw4qldh4s" path="res://assets/SFX/WaveTransition.mp3" id="10_pdh0q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ygioq"]
 size = Vector2(31, 138)
@@ -47,11 +48,13 @@ metadata/_edit_lock_ = true
 
 [node name="Door1" parent="." instance=ExtResource("9_ygioq")]
 position = Vector2(705, 335)
+room_to_unlock = "room_1"
 metadata/_edit_lock_ = true
 
 [node name="Door2" parent="." instance=ExtResource("9_ygioq")]
 position = Vector2(1156, 451)
 cost = 5000
+room_to_unlock = "room_3"
 metadata/_edit_lock_ = true
 
 [node name="ClosedSprite" parent="Door2" index="0"]
@@ -77,6 +80,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Door3" parent="." instance=ExtResource("9_ygioq")]
 position = Vector2(-605, -171)
 cost = 3000
+room_to_unlock = "room_2"
 
 [node name="ClosedSprite" parent="Door3" index="0"]
 position = Vector2(-8.481946, 8.897258)
@@ -193,19 +197,19 @@ position = Vector2(652, 152)
 position = Vector2(806, -193)
 
 [node name="Spawn17" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
-position = Vector2(220, -123)
+position = Vector2(145, -148)
 
 [node name="Spawn18" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
-position = Vector2(295, -340)
+position = Vector2(282, -435)
 
 [node name="Spawn19" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
-position = Vector2(85, -453)
+position = Vector2(85, -454)
 
 [node name="Spawn20" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
-position = Vector2(-127, -448)
+position = Vector2(-126, -464)
 
 [node name="Spawn21" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
-position = Vector2(-121, -240)
+position = Vector2(-126, -222)
 
 [node name="Spawn22" type="Marker2D" parent="SpawnPoints" groups=["room_2"]]
 position = Vector2(-719, -198)
@@ -215,6 +219,9 @@ position = Vector2(-607, 443)
 
 [node name="Spawn24" type="Marker2D" parent="SpawnPoints" groups=["room_2"]]
 position = Vector2(-419, 568)
+
+[node name="Spawn25" type="Marker2D" parent="SpawnPoints" groups=["room_1"]]
+position = Vector2(289, -270)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -232,6 +239,10 @@ bullet_scene = ExtResource("2_d1c63")
 stream = ExtResource("8_b3faq")
 volume_db = -10.0
 parameters/looping = true
+
+[node name="WaveTransition" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_pdh0q")
+volume_db = -20.0
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 

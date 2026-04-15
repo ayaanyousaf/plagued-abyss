@@ -53,14 +53,14 @@ func get_enemy_position():
 		
 		if not spawn_allowed: 
 			continue
-			
+		
 		var distance = point.global_position.distance_to(player.global_position)
 		
-		if distance > 150 and distance < 500: 
+		if distance > 150 and distance < 700: 
 			possible_spawn_points.append(point)
 			
 	if possible_spawn_points.is_empty():
-		return Vector2.ZERO
+		return spawn_points.get_children().pick_random().global_position
 	
 	var chosen_spawn = possible_spawn_points[randi() % possible_spawn_points.size()]
 	var offset = Vector2(randf_range(-20, 20), randf_range(-20, 20))
