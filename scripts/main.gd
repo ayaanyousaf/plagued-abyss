@@ -8,6 +8,7 @@ extends Node2D
 @onready var game_UI = $UI/Game
 @onready var gameover_UI = $UI/GameOver
 @onready var game_over_message = $UI/GameOver/GameOverMessage
+@onready var pause_UI = $UI/Pause
 
 @onready var wave_label = $UI/Game/Wave
 @onready var hp_bar = $UI/Game/HealthBar
@@ -21,6 +22,7 @@ extends Node2D
 enum GameState {
 	MENU,
 	PLAY,
+	PAUSE,
 	GAME_OVER
 }
 
@@ -78,6 +80,13 @@ func change_state(state):
 	menu_UI.visible = (state == GameState.MENU)
 	game_UI.visible = (state == GameState.PLAY)
 	gameover_UI.visible = (state == GameState.GAME_OVER)
+	pause_UI.visible = (state == GameState.PAUSE)
+	
+	if current_world != null:
+		if state == GameState.PAUSE:
+			current_world.process_mode = Node.PROCESS_MODE_DISABLED
+		else:
+			current_world.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	# Play appropriate music depending on game state
 	if state == GameState.MENU: 
@@ -122,5 +131,11 @@ func _on_wave_started(wave: int) -> void:
 	wave_label.text = "Wave " + str(wave)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"): # Handle pause inputs
+		if current_state == GameState.PLAY:
+			change_state(GameState.PAUSE)
+		elif current_state == GameState.PAUSE:
+			change_state(GameState.PLAY)
+			
 	if current_state == GameState.GAME_OVER and event.is_action_pressed("continue"):
 		change_state(GameState.MENU)
