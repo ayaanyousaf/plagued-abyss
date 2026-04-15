@@ -249,13 +249,12 @@ metadata/_edit_lock_ = true
 [node name="UIFrame" type="TextureRect" parent="UI/Game"]
 modulate = Color(1.009993, 0.037908014, 1.4687854, 1)
 layout_mode = 0
-offset_left = -47.0
+offset_left = -49.0
 offset_top = -123.99999
-offset_right = 2041.3333
+offset_right = 2042.6665
 offset_bottom = 1422.6666
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_jlsqs")
-metadata/_edit_lock_ = true
 
 [node name="Wave" type="Label" parent="UI/Game"]
 layout_mode = 0
@@ -352,6 +351,7 @@ text = "Click ENTER to continue"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_wp0k4")
+volume_db = -10.0
 parameters/looping = true
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]

@@ -54,6 +54,10 @@ func get_enemy_position():
 		if not spawn_allowed: 
 			continue
 		
+		# Prevent zombies from spawning in spawn room when in the room to the left
+		if player.global_position.x < -260 and point.global_position.x > -260: 
+			continue
+		
 		var distance = point.global_position.distance_to(player.global_position)
 		
 		if distance > 150 and distance < 700: 
