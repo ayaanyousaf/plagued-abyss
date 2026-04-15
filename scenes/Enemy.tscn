@@ -1,6 +1,7 @@
-[gd_scene load_steps=50 format=3 uid="uid://bimonoddd7khi"]
+[gd_scene load_steps=51 format=3 uid="uid://bimonoddd7khi"]
 
 [ext_resource type="Script" uid="uid://dn5kdgl127vgh" path="res://scripts/enemy.gd" id="1_55jtl"]
+[ext_resource type="PackedScene" uid="uid://dwyffahu56tvs" path="res://scenes/BloodEffect.tscn" id="2_7u3m8"]
 [ext_resource type="Texture2D" uid="uid://b8pk43wgla6al" path="res://assets/zombie_sprites/skeleton-attack_0.png" id="2_j83p5"]
 [ext_resource type="Texture2D" uid="uid://ogkedcie34n5" path="res://assets/zombie_sprites/skeleton-idle_0.png" id="2_oq86d"]
 [ext_resource type="Texture2D" uid="uid://xl7j2ykuwtu" path="res://assets/zombie_sprites/skeleton-attack_1.png" id="3_4q76d"]
@@ -206,6 +207,7 @@ animations = [{
 scale = Vector2(0.6, 0.6)
 collision_layer = 2
 script = ExtResource("1_55jtl")
+death_vfx_scene = ExtResource("2_7u3m8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
 position = Vector2(6.666668, 0)

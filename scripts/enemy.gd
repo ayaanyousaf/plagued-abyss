@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var death_vfx_scene: PackedScene
+
 const SPEED = 60.0
 const STOP_DISTANCE = 20.0 # closest the enemy can get to player (no complete overlap)
 
@@ -90,7 +92,13 @@ func take_damage(amount):
 		set_physics_process(false)
 		visible = false
 		
+		if death_vfx_scene:
+			var vfx = death_vfx_scene.instantiate()
+			vfx.global_position = global_position
+			get_parent().add_child(vfx)
+		
 		await kill_SFX.finished # wait for SFX to finish
+		
 		queue_free()
 	else: 
 		hit.emit(10) # give player 10 points for a successful hit

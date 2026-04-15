@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwyffahu56tvs"]
+
+[ext_resource type="Texture2D" uid="uid://bhodciix1d2no" path="res://assets/Blood/bloodfx001_01.png" id="1_avdmg"]
+[ext_resource type="Script" uid="uid://dr152ebwl4n67" path="res://scripts/blood_effect.gd" id="1_mu7cv"]
+[ext_resource type="Texture2D" uid="uid://b0s6qpafri5dj" path="res://assets/Blood/bloodfx001_02.png" id="2_mu7cv"]
+[ext_resource type="Texture2D" uid="uid://clxr4bnkoopyj" path="res://assets/Blood/bloodfx001_03.png" id="3_nemyu"]
+[ext_resource type="Texture2D" uid="uid://dusewltpedakc" path="res://assets/Blood/bloodfx001_04.png" id="4_xctrm"]
+[ext_resource type="Texture2D" uid="uid://brauhf3o1kt4i" path="res://assets/Blood/bloodfx001_05.png" id="5_sf8nb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j622a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_avdmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mu7cv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nemyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xctrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sf8nb")
+}],
+"loop": false,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="BloodEffect" type="Node2D"]
+script = ExtResource("1_mu7cv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j622a")
+frame = 4
+frame_progress = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
