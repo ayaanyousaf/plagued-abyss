@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var death_vfx_scene: PackedScene
 
-const SPEED = 60.0
+const SPEED = 80.0
 const STOP_DISTANCE = 20.0 # closest the enemy can get to player (no complete overlap)
 
 @onready var attack_range: Area2D = $AttackRange
